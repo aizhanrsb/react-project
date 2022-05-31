@@ -1,3 +1,32 @@
 {
-    "products":[]
+  "products": [
+    {
+      "title": "fngkn",
+      "description": "jhgjfh",
+      "price": "",
+      "image": "https://www.yesasia.ru/wp-content/uploads/2021/12/bts-7fates-chakho-700x467.jpeg",
+      "id": 1
+    },
+    {
+      "title": "fknljh",
+      "description": "bnlkfbl",
+      "price": "kgbnlkjb",
+      "image": "https://www.yesasia.ru/wp-content/uploads/2021/12/bts-7fates-chakho-700x467.jpeg",
+      "id": 2
+    },
+    {
+      "title": "fbkfbjlfjb",
+      "description": "bnlkfbl",
+      "price": "kgbnlkjb",
+      "image": "https://www.yesasia.ru/wp-content/uploads/2021/12/bts-7fates-chakho-700x467.jpeg",
+      "id": 3
+    },
+    {
+      "title": "jfbgfjkhb",
+      "description": "jfbkjhfk",
+      "price": "768576",
+      "image": "",
+      "id": 4
+    }
+  ]
 }
