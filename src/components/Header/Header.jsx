@@ -12,9 +12,15 @@ import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import { authContext } from "../../contexts/authContext";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+
+import { Link } from "@mui/material";
 
 export default function PrimarySearchAppBar() {
+  const { currentUser, logOut } = React.useContext(authContext);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -54,8 +60,25 @@ export default function PrimarySearchAppBar() {
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}>
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>{currentUser.email}</MenuItem>
+      {currentUser ? (
+        <MenuItem
+          onClick={() => {
+            handleMenuClose();
+            logOut();
+          }}>
+          Logout
+        </MenuItem>
+      ) : (
+        <Link href="/login">
+          <MenuItem
+            onClick={() => {
+              handleMenuClose();
+            }}>
+            Log in
+          </MenuItem>
+        </Link>
+      )}
     </Menu>
   );
 
@@ -127,8 +150,43 @@ export default function PrimarySearchAppBar() {
             sx={{ display: { xs: "none", sm: "block" } }}>
             MUI
           </Typography>
+
+          <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            <IconButton
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit">
+              <Badge badgeContent={1} color="error">
+                <AddShoppingCartIcon />
+              </Badge>
+            </IconButton>
+            <IconButton
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
+              color="inherit">
+              <AccountCircle />
+            </IconButton>
+          </Box>
+          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="show more"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              onClick={handleMobileMenuOpen}
+              color="inherit">
+              <MoreIcon />
+            </IconButton>
+          </Box>
         </Toolbar>
       </AppBar>
+      {renderMobileMenu}
+      {renderMenu}
     </Box>
   );
 }
