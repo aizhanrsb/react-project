@@ -6,7 +6,7 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import InfoIcon from "@mui/icons-material/Info";
@@ -14,10 +14,14 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { productsContext } from "../../contexts/productsContext";
+import { CartContext } from "../../contexts/cartContext";
 
 const ProductCard = ({ item }) => {
   const navigate = useNavigate();
   const { deleteProduct } = useContext(productsContext);
+  const { addProductToCart, checkProductInCart } = useContext(CartContext);
+  const [checkProduct, setCheckProduct] = useState(checkProductInCart(item));
+
   // console.log(item);
   return (
     <Card sx={{ maxWidth: 345, margin: "10px" }}>
@@ -49,8 +53,16 @@ const ProductCard = ({ item }) => {
         <Button size="small" onClick={() => navigate(`/edit/${item.id}`)}>
           <EditIcon />
         </Button>
-        <Button size="small">
-          <ShoppingCartIcon />
+        <Button
+          onClick={() => {
+            addProductToCart(item);
+            setCheckProduct(checkProductInCart(item));
+          }}
+          size="small">
+          <ShoppingCartIcon
+            color={checkProduct ? "secondary" : "primary"}
+            // style={{ color: checkProduct ? "red" : "primary" }}
+          />
         </Button>
         <Button size="small" onClick={() => navigate(`/products/${item.id}`)}>
           <InfoIcon />
