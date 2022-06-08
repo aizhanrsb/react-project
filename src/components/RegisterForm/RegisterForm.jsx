@@ -43,7 +43,6 @@ const RegisterForm = () => {
         id="outlined-basic"
         label="Password"
         variant="outlined"
-        
       />
       <Button
         variant="contained"
@@ -51,6 +50,17 @@ const RegisterForm = () => {
         onClick={handleValues}>
         Register
       </Button>
+      <Typography variant="p" component="h4">
+        Already have an account?
+      </Typography>
+      <Typography
+        onClick={() => navigate("/login")}
+        style={{ cursor: "pointer" }}
+        color={"primary"}
+        variant="p"
+        component="h4">
+        Log in
+      </Typography>
     </Box>
   );
 };

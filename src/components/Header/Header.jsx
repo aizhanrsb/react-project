@@ -17,7 +17,7 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 // import { Link } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from "../../contexts/cartContext";
 
 export default function PrimarySearchAppBar() {
@@ -25,6 +25,7 @@ export default function PrimarySearchAppBar() {
   React.useEffect(() => {
     getCart();
   }, []);
+  const navigate = useNavigate();
   const { currentUser, logOut } = React.useContext(authContext);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -141,20 +142,25 @@ export default function PrimarySearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}>
-            <MenuIcon />
-          </IconButton>
           <Typography
+            onClick={() => navigate("/")}
+            style={{ marginRight: "30px", cursor: "pointer" }}
             variant="h6"
             noWrap
             component="div"
+            // display={{xs: "none", sm: "block" }}
             sx={{ display: { xs: "none", sm: "block" } }}>
-            MUI
+            RainBow
+          </Typography>
+          <Typography
+            onClick={() => navigate("/products")}
+            style={{ marginRight: "30px", cursor: "pointer" }}
+            variant="h6"
+            noWrap
+            component="div"
+            // display={{xs: "none", sm: "block" }}
+            sx={{ display: { xs: "none", sm: "block" } }}>
+            Products
           </Typography>
 
           <Box sx={{ flexGrow: 1 }} />
