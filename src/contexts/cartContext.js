@@ -1,15 +1,20 @@
+import { getCardUtilityClass } from "@mui/material";
 import React, { useReducer } from "react";
 
 export const CartContext = React.createContext();
 
 const INIT_STATE = {
-  cart: {},
+  cart: null,
   count: 0,
 };
 function reducer(state = INIT_STATE, action) {
   switch (action.type) {
     case "GET_CART":
-      return { ...state, cart: action.payload };
+      return {
+        ...state,
+        cart: action.payload,
+        count: action.payload.products.length,
+      };
     default:
       return state;
   }
@@ -44,6 +49,7 @@ const CartContextProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(cart));
     // console.log(cart);
     // console.log(product);
+    getCart();
   }
 
   function checkProductInCart(product) {
@@ -59,8 +65,30 @@ const CartContextProvider = ({ children }) => {
     );
     return isProductInCart;
   }
+  function getCart() {
+    let cart = JSON.parse(localStorage.getItem("cart"));
+    if (!cart) {
+      cart = {
+        products: [],
+        totalPrice: 0,
+      };
+    }
+    dispatch({
+      type: "GET_CART",
+      payload: cart,
+    });
+  }
+  // console.log(state.count);
+
   return (
-    <CartContext.Provider value={{ addProductToCart, checkProductInCart }}>
+    <CartContext.Provider
+      value={{
+        cart: state.cart,
+        count: state.count,
+        addProductToCart,
+        checkProductInCart,
+        getCart,
+      }}>
       {children}
     </CartContext.Provider>
   );

@@ -9,15 +9,18 @@ import "./App.css";
 import ProductsContextProvider from "./contexts/productsContext";
 import AuthContextProvider from "./contexts/authContext";
 import CartContextProvider from "./contexts/cartContext";
+import { BrowserRouter } from "react-router-dom";
 
 const App = () => {
   return (
     <AuthContextProvider>
       <ProductsContextProvider>
         <CartContextProvider>
-          <Header />
-          <Routing />
-          <Footer />
+          <BrowserRouter>
+            <Header />
+            <Routing />
+            <Footer />
+          </BrowserRouter>
         </CartContextProvider>
       </ProductsContextProvider>
     </AuthContextProvider>

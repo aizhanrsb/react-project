@@ -16,9 +16,15 @@ import { authContext } from "../../contexts/authContext";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
-import { Link } from "@mui/material";
+// import { Link } from "@mui/material";
+import { Link } from "react-router-dom";
+import { CartContext } from "../../contexts/cartContext";
 
 export default function PrimarySearchAppBar() {
+  const { count, getCart } = React.useContext(CartContext);
+  React.useEffect(() => {
+    getCart();
+  }, []);
   const { currentUser, logOut } = React.useContext(authContext);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -70,7 +76,7 @@ export default function PrimarySearchAppBar() {
           Logout
         </MenuItem>
       ) : (
-        <Link href="/login">
+        <Link to="/login">
           <MenuItem
             onClick={() => {
               handleMenuClose();
@@ -153,14 +159,17 @@ export default function PrimarySearchAppBar() {
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit">
-              <Badge badgeContent={1} color="error">
-                <AddShoppingCartIcon />
-              </Badge>
-            </IconButton>
+            <Link to="/cart">
+              <IconButton
+                size="large"
+                aria-label="show 17 new notifications"
+                color="inherit">
+                <Badge badgeContent={count} color="error">
+                  <AddShoppingCartIcon />
+                </Badge>
+              </IconButton>
+            </Link>
+
             <IconButton
               size="large"
               edge="end"

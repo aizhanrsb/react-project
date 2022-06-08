@@ -43,6 +43,7 @@ const RegisterForm = () => {
         id="outlined-basic"
         label="Password"
         variant="outlined"
+        
       />
       <Button
         variant="contained"

@@ -10,11 +10,12 @@ import React, { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import InfoIcon from "@mui/icons-material/Info";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { productsContext } from "../../contexts/productsContext";
 import { CartContext } from "../../contexts/cartContext";
+import { AddShoppingCart } from "@mui/icons-material";
 
 const ProductCard = ({ item }) => {
   const navigate = useNavigate();
@@ -59,10 +60,7 @@ const ProductCard = ({ item }) => {
             setCheckProduct(checkProductInCart(item));
           }}
           size="small">
-          <ShoppingCartIcon
-            color={checkProduct ? "secondary" : "primary"}
-            // style={{ color: checkProduct ? "red" : "primary" }}
-          />
+          <AddShoppingCart color={checkProduct ? "secondary" : "primary"} />
         </Button>
         <Button size="small" onClick={() => navigate(`/products/${item.id}`)}>
           <InfoIcon />
